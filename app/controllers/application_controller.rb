@@ -16,7 +16,8 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-
+    redirect_if_not_logged_in
+    @user = User.find_by(username: params[:user][:username])
   end
 
   helpers do
@@ -33,6 +34,12 @@ class ApplicationController < Sinatra::Base
     def redirect_if_not_logged_in
       if !is_logged_in?
         redirect '/'
+      end
+    end
+
+    def user_params
+      params.select do |k, v|
+        ["username", "email", "password"].include?(k)
       end
     end
   end
