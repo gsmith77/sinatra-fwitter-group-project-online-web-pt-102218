@@ -39,10 +39,11 @@ class ApplicationController < Sinatra::Base
 
   post '/signup' do
     @user = User.create(user_params)
-    if @user.valid? & @user
+    #binding.pry
+    if @user.valid? && @user
       session[:id] = @user.id
       @tweets = Tweet.all
-      erb :'/tweets/index'
+      redirect '/tweets'
     end
     redirect '/signup'
   end
