@@ -1,0 +1,7 @@
+<%if !@tweets == []%>
+  <%@tweets.each do |tweet|%>
+    <%=tweet.content%>
+  <%end%>
+<%else%>
+  <h1>There are no Tweets</h1>
+<%end%>
